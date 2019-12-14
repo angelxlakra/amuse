@@ -1,0 +1,108 @@
+html {
+  min-width: 1000px;
+  position: relative;
+}
+
+.navbar {
+  background: #34eb61;
+  height: 60px;
+  padding-top: 0;
+}
+
+.navbar::after {
+  content: "";
+  display: block;
+  width: 100%;
+  height: 5px;
+  background: rgba(0, 0, 0, 0.15);
+  opacity: 10%;
+  transform: translateY(-7px);
+}
+
+.container {
+  width: 80%;
+  margin: 0 auto;
+  padding: 0 10px 0 0;
+}
+
+.navbar-brand {
+  float: left;
+  padding: -5px 0;
+  margin: 15px 0 0 0;
+}
+
+.brand {
+  text-decoration: none;
+  color: white;
+  font-size: 30px;
+  font-family: "LilitaOne";
+  transform: translateY(2px);
+}
+
+.navlinks {
+  display: inline-block;
+  list-style: none;
+  margin-top: 0;
+  padding-top: 0;
+  height: 50px;
+  position: absolute;
+  transform: translateY(-10px);
+}
+
+li {
+  display: inline-block;
+  margin-left: 70px;
+  padding-top: 0;
+  position: relative;
+  text-shadow: none;
+}
+
+.nav-item:hover {
+  color: aliceblue;
+  text-decoration: none;
+  text-shadow: 5px 3px rgba(0, 0, 0, 0.15);
+}
+
+li::before {
+  content: "";
+  display: block;
+  height: 5px;
+  width: 0%;
+  background-color: beige;
+  padding-top: 0;
+  transition: all ease-in-out 250ms;
+}
+
+.nav-item::before {
+  content: "";
+  display: block;
+  height: 5px;
+  width: 0%;
+  background-color: beige;
+  padding-top: 0;
+  transition: all ease-in-out 250ms;
+}
+
+.nav-item {
+  font-size: 20px;
+  font-family: "LilitaOne";
+  margin-left: 70px;
+  text-decoration: none;
+  color: black;
+  transition: 300ms;
+}
+
+.nav-item:hover::before {
+  width: 100%;
+}
+
+.nav-item:hover li::before {
+  width: 100%;
+}
+
+.login {
+  display: inline;
+  transform: translateY(15px);
+  float: right;
+  position: relative;
+}
