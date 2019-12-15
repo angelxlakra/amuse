@@ -1,7 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import "../styles/navBar.css";
-import logo1 from "../res/images/logo1.png";
 
 const NavBar = () => {
   return (
@@ -34,7 +33,7 @@ const NavBar = () => {
             </Link>
           </li>
         </ul>
-        <a className="nav-item login" href="http://localhost:8888/">
+        <a className="nav-item login" href="http://localhost:8888/login">
           Login
         </a>
       </div>

@@ -1,16 +1,10 @@
 import React, { Component } from "react";
-import { Route, Switch, Redirect } from "react-router-dom";
+import { Route, Switch } from "react-router-dom";
 import "./App.css";
 import NavBar from "./components/navBar";
-import { tsConstructorType } from "@babel/types";
+import Profile from "./components/profile";
 
 class App extends Component {
-  constructor() {
-    super();
-    const params = this.getHashParams();
-    console.log(params);
-  }
-
   getHashParams() {
     var hashParams = {};
     var e,
@@ -27,6 +21,16 @@ class App extends Component {
     return (
       <React.Fragment>
         <NavBar></NavBar>
+        <main className="container">
+          <Switch>
+            <Route
+              path="/profile"
+              render={props => (
+                <Profile params={this.getHashParams()}></Profile>
+              )}
+            ></Route>
+          </Switch>
+        </main>
       </React.Fragment>
     );
   }

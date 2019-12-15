@@ -12,7 +12,7 @@ var redirect_uri = "http://localhost:8888/callback"; // Your redirect uri
 var generateRandomString = length => {
   var text = "";
   var possible =
-    "QWERTYUIOPLKJHGFDSAZXCVBNMzxcvbnmqwertyuioplkjhgfdsa0192837465";
+    "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
 
   for (var i = 0; i < length; i++) {
     text += possible.charAt(Math.floor(Math.random() * possible.length));
@@ -33,6 +33,7 @@ app.get("/login", (req, res) => {
   const state = generateRandomString(16);
   res.cookie(stateKey, state);
   const scope = "user-read-private user-read-email user-read-playback-state";
+  console.log(1);
   res.redirect(
     "https://accounts.spotify.com/authorize?" +
       querystring.stringify({
@@ -49,8 +50,10 @@ app.get("/callback", (req, res) => {
   const code = req.query.code || null;
   const state = req.query.state || null;
   const storedState = req.cookies ? req.cookies[stateKey] : null;
+  console.log(2);
 
   if (state === null || state !== storedState) {
+    console.log(2.1);
     res.redirect(
       "/#" +
         querystring.stringify({
@@ -58,6 +61,7 @@ app.get("/callback", (req, res) => {
         })
     );
   } else {
+    console.log(2.2);
     res.clearCookie(stateKey);
     const authOptions = {
       url: "https://accounts.spotify.com/api/token",
@@ -68,15 +72,17 @@ app.get("/callback", (req, res) => {
       },
       headers: {
         Authorization:
-          "Basic" + new Buffer(client_id + ":" + client_secret).toString(base64)
+          "Basic " +
+          new Buffer(client_id + ":" + client_secret).toString("base64")
       },
       json: true
     };
 
     request.post(authOptions, (error, response, body) => {
       if (!error && response.statusCode === 200) {
-        const access_token = body.access_token;
-        const refresh_token = body.refresh_token;
+        console.log(3.1);
+        var access_token = body.access_token;
+        var refresh_token = body.refresh_token;
 
         const options = {
           url: "https://api.spotify.com/v1/me",
@@ -85,17 +91,18 @@ app.get("/callback", (req, res) => {
         };
 
         request.get(options, (error, response, body) => {
-          console.log(body);
+          // console.log(body);
         });
 
         res.redirect(
-          "http://localhost:3000/#" +
+          "http://localhost:3000/profile/#" +
             querystring.stringify({
               access_token: access_token,
               refresh_token: refresh_token
             })
         );
       } else {
+        console.log(3.2);
         res.redirect(
           "/#" +
             querystring.stringify({
@@ -131,6 +138,19 @@ app.get("/refresh_token", function(req, res) {
         access_token: access_token
       });
     }
+  });
+});
+
+app.get("/profile", (req, res) => {
+  const access_token = req.query.access_token;
+  // console.log(access_token);
+  const options = {
+    url: "https://api.spotify.com/v1/me",
+    headers: { Authorization: "Bearer " + access_token }
+  };
+  request.get(options, (error, response, body) => {
+    // console.log(body);
+    res.send(body);
   });
 });
 
