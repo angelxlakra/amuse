@@ -1,5 +1,6 @@
 var express = require("express"); // Express web server framework
 var request = require("request"); // "Request" library
+var morgan = require("morgan");
 var cors = require("cors");
 var cookieParser = require("cookie-parser");
 var oauth = require("./routes/oauth");
@@ -9,11 +10,12 @@ app
   .use(express.static(__dirname + "/public"))
   .use(cors())
   .use(cookieParser())
-  .use("/auth", oauth);
+  .use("/auth", oauth)
+  .use(morgan("tiny"));
 
 app.get("/profile", (req, res) => {
   const access_token = req.query.access_token;
-  console.log(access_token);
+  // console.log(access_token);
   const options = {
     url: "https://api.spotify.com/v1/me",
     headers: { Authorization: "Bearer " + access_token }

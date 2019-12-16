@@ -1,10 +1,8 @@
 var express = require("express");
 var request = require("request"); // "Request" library
-var cors = require("cors");
 var querystring = require("querystring");
-var cookieParser = require("cookie-parser");
 
-var client_id = "fd9b8e707e14fb18cd423001d6de23e";
+var client_id = "7fd9b8e707e14fb18cd423001d6de23e";
 var client_secret = "dd219eb452524a05aa4e07f5ed7291db"; // Your secret
 var redirect_uri = "http://localhost:8888/auth/callback"; // Your redirect uri
 
@@ -73,16 +71,6 @@ app.get("/callback", (req, res) => {
       if (!error && response.statusCode === 200) {
         var access_token = body.access_token;
         var refresh_token = body.refresh_token;
-
-        const options = {
-          url: "https://api.spotify.com/v1/me",
-          headers: { Authorization: "Bearer " + access_token },
-          json: true
-        };
-
-        request.get(options, (error, response, body) => {
-          // console.log(body);
-        });
 
         res.redirect(
           "http://localhost:3000/loggedIn/#" +
