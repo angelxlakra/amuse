@@ -8,12 +8,12 @@ const NavBar = () => {
       <div className="container">
         <div className="navbar-brand">
           <Link className="brand" to="#">
-            R2M
+            Amuse
           </Link>
         </div>
         <ul className="navlinks">
           <li>
-            <Link className="nav-item" to="#">
+            <Link className="nav-item" to="/home ">
               Home
             </Link>
           </li>
@@ -33,9 +33,16 @@ const NavBar = () => {
             </Link>
           </li>
         </ul>
-        <a className="nav-item login" href="http://localhost:8888/login">
-          Login
-        </a>
+        {localStorage.getItem("access_token") && (
+          <a className="nav-item logout" href="http://localhost:3000/logout">
+            Logout
+          </a>
+        )}
+        {!localStorage.getItem("access_token") && (
+          <a className="nav-item login" href="http://localhost:8888/auth/login">
+            Login
+          </a>
+        )}
       </div>
     </nav>
   );

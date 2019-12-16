@@ -4,22 +4,13 @@ html {
 }
 
 .navbar {
-  background: #34eb61;
+  background: rgba(0, 0, 0, 0.5);
   height: 60px;
   padding-top: 0;
 }
 
-.navbar::after {
-  content: "";
-  display: block;
-  width: 100%;
-  height: 5px;
-  background: rgba(0, 0, 0, 0.15);
-  opacity: 10%;
-  transform: translateY(-7px);
-}
-
 .container {
+  height: 65px;
   width: 80%;
   margin: 0 auto;
   padding: 0 10px 0 0;
@@ -101,6 +92,13 @@ li::before {
 }
 
 .login {
+  display: inline;
+  transform: translateY(15px);
+  float: right;
+  position: relative;
+}
+
+.logout {
   display: inline;
   transform: translateY(15px);
   float: right;

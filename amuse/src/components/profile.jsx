@@ -5,13 +5,13 @@ class Profile extends Component {
   state = { userData: {}, imageURL: "#", external_URL: "#" };
 
   componentDidMount() {
-    const { params } = this.props;
+    const { accessToken } = this.props;
     axios
       .get("http://localhost:8888/profile", {
-        params: { access_token: params.access_token }
+        params: { access_token: accessToken }
       })
       .then(res => {
-        console.log(res.data);
+        // console.log(res);
         this.setState({
           userData: res.data,
           imageURL: res.data.images[0].url,
@@ -21,14 +21,19 @@ class Profile extends Component {
   }
   render() {
     const { userData, imageURL, externalURL } = this.state;
-    const imagesrc = userData.images;
-    console.log(imagesrc);
+    // const imagesrc = userData.images;
+    // console.log(imagesrc);
     return (
       <div>
         <h1>Logged in as {userData.display_name}</h1>
         <div className="media">
           <div className="pull-left">
-            <img className="media-object" width="150" src={imageURL} />
+            <img
+              className="media-object"
+              width="150"
+              src={imageURL}
+              alt="image"
+            />
           </div>
           <div className="media-body">
             <dl className="dl-horizontal">
