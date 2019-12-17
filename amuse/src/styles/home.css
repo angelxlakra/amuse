@@ -1,5 +1,6 @@
 @import url("https://fonts.googleapis.com/css?family=Pacifico&display=swap");
 @import url("https://fonts.googleapis.com/css?family=Aclonica&display=swap");
+@import url("https://fonts.googleapis.com/css?family=B612|Roboto&display=swap");
 
 .back {
   z-index: -1;
@@ -16,50 +17,81 @@
 
 .intro {
   float: right;
-  margin-top: 200px;
+  margin-right: 200px;
+  margin-top: 100px;
   padding-top: 40px;
   /* margin-right: 100px; */
   height: 500px;
-  width: 1000px;
-  background-color: rgba(98, 15, 194, 0.02);
+  width: 850px;
+  /* background-color: rgba(98, 15, 194, 0.3); */
 
   color: rgb(0, 0, 0);
 }
 
 #line1 {
-  font-family: "Pacifico", cursive;
-  font-size: 50px;
+  margin: 10px 0 10px 0;
+  text-align: right;
+  font-family: "B612", sans-serif;
+  font-size: 80px;
+  font-weight: 700;
 }
 
 #line2 {
+  text-align: right;
+  font-weight: 70;
   font-family: "Pacifico", sans-serif;
   font-size: 90px;
-  text-align: center;
-  margin-top: -50px;
-  margin-right: 50px;
+  margin: -30px 0;
+  color: white;
+}
+
+.para {
+  font-size: 25px;
+  font-family: B612;
+  font-weight: ;
+  text-align: right;
+  margin: 30px auto;
+}
+
+.par {
+  margin: 10px auto;
 }
 
 .login-btn {
+  text-decoration: none;
   float: right;
   margin-right: 200px;
-  background-color: rgba(0, 0, 0, 0);
+  background-color: rgba(0, 0, 0, 1);
   color: white;
   border: 5px solid white;
+  border-radius: 3px;
   font-size: 40px;
   padding: 14px 40px;
-  border-radius: 50px;
+  transform: translateX(200px);
   font-family: LilitaOne;
   transition: all ease-in-out 600ms;
 }
 
 .login-btn:hover {
-  color: rgb(64, 179, 64);
-  border: 3px dashed black;
-  background-color: whitesmoke;
-  opacity: 80%;
+  color: white;
+  border: 3px solid black;
+  background-color: rgba(0, 0, 0, 0.4);
+  opacity: 50%;
 }
 
 button:focus {
   cursor: pointer;
   outline: none;
+}
+
+.spotify-ic {
+  padding-right: 20px;
+  margin-right: 20px;
+  border-right: 2px solid white;
+  transition: all ease-in-out 300ms;
+}
+
+.login-btn:hover .spotify-ic {
+  color: #1db954;
+  display: inline;
 }

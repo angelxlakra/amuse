@@ -5,6 +5,7 @@ import "./index.css";
 import App from "./App";
 import * as serviceWorker from "./serviceWorker";
 import "./fonts/LilitaOne-Regular.ttf";
+import "../node_modules/@fortawesome/fontawesome-free/css/all.css";
 
 ReactDOM.render(
   <BrowserRouter>
