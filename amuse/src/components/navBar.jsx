@@ -28,9 +28,11 @@ const NavBar = () => {
             </Link>
           </li>
           <li>
-            <Link className="nav-item" to="#">
-              Settings
-            </Link>
+            {localStorage.getItem("access_token") && (
+              <Link className="nav-item" to="/profile">
+                Profile
+              </Link>
+            )}
           </li>
         </ul>
         {localStorage.getItem("access_token") && (

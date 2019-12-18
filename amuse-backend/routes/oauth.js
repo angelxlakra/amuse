@@ -1,6 +1,8 @@
 var express = require("express");
 var request = require("request"); // "Request" library
 var querystring = require("querystring");
+const mongoose = require("mongoose");
+const { User } = require("../models/user");
 
 var client_id = "7fd9b8e707e14fb18cd423001d6de23e";
 var client_secret = "dd219eb452524a05aa4e07f5ed7291db"; // Your secret
@@ -71,6 +73,35 @@ app.get("/callback", (req, res) => {
       if (!error && response.statusCode === 200) {
         var access_token = body.access_token;
         var refresh_token = body.refresh_token;
+
+        const options = {
+          url: "https://api.spotify.com/v1/me",
+          headers: { Authorization: "Bearer " + access_token },
+          json: true
+        };
+        request.get(options, (error, response, body) => {
+          async function getData() {
+            const user = await User.find({ s_id: body.id });
+            // console.log(body);
+            if (!user.length) {
+              let image =
+                "https://www.kodefork.com/static/users/images/user.png";
+              if (body.images.length) {
+                image = body.images[0].url;
+              }
+              const user = new User({
+                name: body.display_name,
+                s_id: body.id,
+                image_url: image,
+                country: body.country,
+                email: body.email
+              });
+              user.save();
+              console.log("saved");
+            }
+          }
+          getData();
+        });
 
         res.redirect(
           "http://localhost:3000/loggedIn/#" +

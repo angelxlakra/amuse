@@ -4,6 +4,14 @@ var morgan = require("morgan");
 var cors = require("cors");
 var cookieParser = require("cookie-parser");
 var oauth = require("./routes/oauth");
+var mongoose = require("mongoose");
+
+mongoose
+  .connect("mongodb://localhost/amuse")
+  .then(() => console.log("Connected to Database.."))
+  .catch(err => {
+    console.log("Could not connect to Database.", err);
+  });
 
 const app = express();
 app
