@@ -64,7 +64,7 @@ app.get("/callback", (req, res) => {
       headers: {
         Authorization:
           "Basic " +
-          new Buffer(client_id + ":" + client_secret).toString("base64")
+          new Buffer.from(client_id + ":" + client_secret).toString("base64")
       },
       json: true
     };
@@ -97,7 +97,7 @@ app.get("/callback", (req, res) => {
                 email: body.email
               });
               user.save();
-              console.log("saved");
+              console.log("Saved user...");
             }
           }
           getData();
@@ -130,7 +130,7 @@ app.get("/refresh_token", function(req, res) {
     headers: {
       Authorization:
         "Basic " +
-        new Buffer(client_id + ":" + client_secret).toString("base64")
+        new Buffer.from(client_id + ":" + client_secret).toString("base64")
     },
     form: {
       grant_type: "refresh_token",
