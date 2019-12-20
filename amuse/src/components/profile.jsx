@@ -2,58 +2,41 @@ import React, { Component } from "react";
 import axios from "axios";
 
 class Profile extends Component {
-  state = { userData: {}, imageURL: "#", external_URL: "#" };
+  state = { userData: {} };
 
-  componentDidMount() {
-    const { accessToken } = this.props;
-    axios
-      .get("http://localhost:8888/profile", {
-        params: { access_token: accessToken }
-      })
-      .then(res => {
-        // console.log(res);
-        this.setState({
-          userData: res.data,
-          imageURL: res.data.images[0].url,
-          externalURL: res.data.external_urls.spotify
-        });
-      });
+  async componentDidMount() {
+    const id = localStorage.getItem("id");
+    const { data } = await axios.get("http://localhost:8888/profile/" + id);
+    console.log(data);
+    this.setState({ userData: data[0] });
   }
   render() {
-    const { userData, imageURL, externalURL } = this.state;
-    // const imagesrc = userData.images;
-    // console.log(imagesrc);
+    const { userData } = this.state;
+    console.log("Name", userData.name);
     return (
       <div>
-        <h1>Logged in as {userData.display_name}</h1>
+        <h1>Logged in as {userData.name}</h1>
         <div className="media">
           <div className="pull-left">
             <img
               className="media-object"
               width="150"
-              src={imageURL}
-              alt="image"
+              src={userData.image_url}
+              alt="profile"
             />
           </div>
           <div className="media-body">
             <dl className="dl-horizontal">
               <dt>Display name</dt>
-              <dd className="clearfix">{userData.display_name}</dd>
+              <dd className="clearfix">{userData.name}</dd>
               <dt>Id</dt>
-              <dd>{userData.id}</dd>
+              <dd>{userData.s_id}</dd>
               <dt>Email</dt>
               <dd>{userData.email}</dd>
               <dt>Spotify URI</dt>
-              <dd>
-                <a href={externalURL}>{externalURL}</a>
-              </dd>
-              <dt>Link</dt>
-              <dd>
-                <a href={userData.href}>{userData.href}</a>
-              </dd>
               <dt>Profile Image</dt>
               <dd className="clearfix">
-                <a href={imageURL}>{imageURL}</a>
+                <a href={userData.image_url}>{userData.image_url}</a>
               </dd>
               <dt>Country</dt>
               <dd>{userData.country}</dd>

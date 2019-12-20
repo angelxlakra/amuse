@@ -15,10 +15,12 @@ class LoggedIn extends Component {
   }
   componentDidMount() {
     const tokens = this.getHashParams();
+    console.log("tokens", tokens);
     localStorage.setItem("access_token", tokens.access_token);
+    localStorage.setItem("id", tokens.id);
     setTimeout(function() {
       window.location = "/";
-    }, 2000);
+    }, 20000);
   }
   render() {
     return (

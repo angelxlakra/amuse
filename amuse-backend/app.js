@@ -5,6 +5,7 @@ var cors = require("cors");
 var cookieParser = require("cookie-parser");
 var oauth = require("./routes/oauth");
 var mongoose = require("mongoose");
+const { User } = require("./models/user");
 
 mongoose
   .connect("mongodb://localhost/amuse", {
@@ -24,17 +25,11 @@ app
   .use("/auth", oauth)
   .use(morgan("tiny"));
 
-app.get("/profile", (req, res) => {
-  const access_token = req.query.access_token;
-  // console.log(access_token);
-  const options = {
-    url: "https://api.spotify.com/v1/me",
-    headers: { Authorization: "Bearer " + access_token }
-  };
-  request.get(options, (error, response, body) => {
-    // console.log(body);
-    res.send(body);
-  });
+app.get("/profile/:id", async (req, res) => {
+  const id = req.params.id;
+  const user = await User.find({ s_id: id }).limit(1);
+  console.log(user);
+  res.send(user);
 });
 
 app.listen(8888, () => {

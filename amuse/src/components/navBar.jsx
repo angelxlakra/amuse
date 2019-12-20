@@ -2,7 +2,8 @@ import React from "react";
 import { Link } from "react-router-dom";
 import "../styles/navBar.css";
 
-const NavBar = () => {
+const NavBar = ({ username, pr_img }) => {
+  const name = username.split(" ")[0];
   return (
     <nav className="navbar">
       <div className="container">
@@ -27,24 +28,30 @@ const NavBar = () => {
               Group
             </Link>
           </li>
-          <li>
-            {localStorage.getItem("access_token") && (
-              <Link className="nav-item" to="/profile">
-                Profile
-              </Link>
-            )}
-          </li>
         </ul>
-        {localStorage.getItem("access_token") && (
-          <a className="nav-item logout" href="http://localhost:3000/logout">
-            Logout
-          </a>
-        )}
-        {!localStorage.getItem("access_token") && (
-          <a className="nav-item login" href="http://localhost:8888/auth/login">
-            Login
-          </a>
-        )}
+        <div className="profiler1">
+          {localStorage.getItem("access_token") && (
+            <div className="profiler2">
+              <img className="prof_img" src={pr_img}></img>
+              <Link className="nav-item prof" to="/profile">
+                {name}
+              </Link>
+            </div>
+          )}
+          {localStorage.getItem("access_token") && (
+            <a className="nav-item logout" href="http://localhost:3000/logout">
+              Logout
+            </a>
+          )}
+          {!localStorage.getItem("access_token") && (
+            <a
+              className="nav-item login"
+              href="http://localhost:8888/auth/login"
+            >
+              Login
+            </a>
+          )}
+        </div>
       </div>
     </nav>
   );

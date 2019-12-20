@@ -27,7 +27,8 @@ var generateRandomString = length => {
 app.get("/login", (req, res) => {
   const state = generateRandomString(16);
   res.cookie(stateKey, state);
-  const scope = "user-read-private user-read-email user-read-playback-state";
+  const scope =
+    "user-read-playback-state user-read-email playlist-read-collaborative user-modify-playback-state user-read-private playlist-modify-public user-library-modify user-top-read user-read-currently-playing playlist-read-private user-follow-read app-remote-control user-read-recently-played playlist-modify-private user-follow-modify user-library-read ";
   res.redirect(
     "https://accounts.spotify.com/authorize?" +
       querystring.stringify({
@@ -39,6 +40,8 @@ app.get("/login", (req, res) => {
       })
   );
 });
+
+var url = "http://localhost:3000/loggedIn/";
 
 app.get("/callback", (req, res) => {
   const code = req.query.code || null;
@@ -80,6 +83,7 @@ app.get("/callback", (req, res) => {
           json: true
         };
         request.get(options, (error, response, body) => {
+          url = body.id;
           async function getData() {
             const user = await User.find({ s_id: body.id });
             // console.log(body);
@@ -99,17 +103,17 @@ app.get("/callback", (req, res) => {
               user.save();
               console.log("Saved user...");
             }
+            res.redirect(
+              "http://localhost:3000/loggedIn/#" +
+                querystring.stringify({
+                  id: body.id,
+                  access_token: access_token,
+                  refresh_token: refresh_token
+                })
+            );
           }
           getData();
         });
-
-        res.redirect(
-          "http://localhost:3000/loggedIn/#" +
-            querystring.stringify({
-              access_token: access_token,
-              refresh_token: refresh_token
-            })
-        );
       } else {
         res.redirect(
           "/#" +
@@ -118,6 +122,7 @@ app.get("/callback", (req, res) => {
             })
         );
       }
+      console.log("id", url);
     });
   }
 });
