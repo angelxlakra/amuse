@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import "../styles/loggedIn.css";
 
 class LoggedIn extends Component {
   getHashParams() {
@@ -20,12 +21,12 @@ class LoggedIn extends Component {
     localStorage.setItem("id", tokens.id);
     setTimeout(function() {
       window.location = "/";
-    }, 20000);
+    }, 2000);
   }
   render() {
     return (
       <div className="loggedin">
-        <h1>Logged in Succesfully, Redirecting ...</h1>
+        <h1 id="redirect">Logged in Succesfully, Redirecting ...</h1>
       </div>
     );
   }

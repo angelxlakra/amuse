@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import axios from "axios";
+import "../styles/profile.css";
 
 class Profile extends Component {
   state = { userData: {} };
@@ -14,33 +15,31 @@ class Profile extends Component {
     const { userData } = this.state;
     console.log("Name", userData.name);
     return (
-      <div>
-        <h1>Logged in as {userData.name}</h1>
-        <div className="media">
-          <div className="pull-left">
-            <img
-              className="media-object"
-              width="150"
-              src={userData.image_url}
-              alt="profile"
-            />
+      <div className="profile-back">
+        <div className="userdata">
+          <div className="image-con">
+            <a href={userData.image_url}>
+              <img className="profileImage" src={userData.image_url}></img>
+            </a>
           </div>
-          <div className="media-body">
-            <dl className="dl-horizontal">
-              <dt>Display name</dt>
-              <dd className="clearfix">{userData.name}</dd>
-              <dt>Id</dt>
-              <dd>{userData.s_id}</dd>
-              <dt>Email</dt>
-              <dd>{userData.email}</dd>
-              <dt>Spotify URI</dt>
-              <dt>Profile Image</dt>
-              <dd className="clearfix">
-                <a href={userData.image_url}>{userData.image_url}</a>
-              </dd>
-              <dt>Country</dt>
-              <dd>{userData.country}</dd>
-            </dl>
+          <div className="name">
+            <h1>{userData.name}</h1>
+          </div>
+          <div id="informs">
+            <table className="informs">
+              <tr>
+                <th>Spotify ID</th>
+                <th>{userData.s_id}</th>
+              </tr>
+              <tr>
+                <th>Email ID</th>
+                <th>{userData.email}</th>
+              </tr>
+              <tr>
+                <th>Country</th>
+                <th>{userData.country}</th>
+              </tr>
+            </table>
           </div>
         </div>
       </div>

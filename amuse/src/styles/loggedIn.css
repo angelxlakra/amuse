@@ -1,0 +1,22 @@
+@import url("https://fonts.googleapis.com/css?family=Baloo+Bhai&display=swap");
+
+.loggedin {
+  z-index: -1;
+  width: 1855px;
+  height: 950px;
+  position: absolute;
+  left: 0;
+  top: 0;
+  background-image: url("https://images.unsplash.com/photo-1458560871784-56d23406c091?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1267&q=80");
+  background-size: 100%;
+  background-repeat: no-repeat;
+  background-position: center center;
+}
+
+#redirect {
+  text-align: center;
+  margin-top: 10%;
+  font-family: "Baloo Bhai", cursive;
+  font-size: 50px;
+  font-weight: lighter;
+}
