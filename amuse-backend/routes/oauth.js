@@ -98,7 +98,8 @@ app.get("/callback", (req, res) => {
                 s_id: body.id,
                 image_url: image,
                 country: body.country,
-                email: body.email
+                email: body.email,
+                followers: body.followers.total
               });
               user.save();
               console.log("Saved user...");

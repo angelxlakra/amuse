@@ -7,7 +7,8 @@ const User = mongoose.model(
     s_id: String,
     image_url: { type: String, default: "" },
     country: String,
-    email: String
+    email: String,
+    followers: String
   })
 );
 

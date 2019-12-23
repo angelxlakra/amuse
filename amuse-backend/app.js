@@ -18,6 +18,7 @@ mongoose
   });
 
 const app = express();
+
 app
   .use(express.static(__dirname + "/public"))
   .use(cors())
@@ -30,6 +31,46 @@ app.get("/profile/:id", async (req, res) => {
   const user = await User.find({ s_id: id }).limit(1);
   console.log(user);
   res.send(user);
+});
+
+app.get("/top/track/:access_token", async (req, res) => {
+  const access_token = req.params.access_token;
+  const options = {
+    method: "GET",
+    url:
+      "https://api.spotify.com/v1/me/top/tracks?time_range=medium_term&limit=1",
+    headers: {
+      Accept: "application/json",
+      "Content-Type": "application/json",
+      Authorization: "Bearer " + access_token
+    }
+  };
+  request(options, (error, response, body) => {
+    if (error) {
+      return console.log("Failed to get Data");
+    }
+    res.send(JSON.parse(body));
+  });
+});
+
+app.get("/top/artist/:access_token", async (req, res) => {
+  const access_token = req.params.access_token;
+  const options = {
+    method: "GET",
+    url:
+      "https://api.spotify.com/v1/me/top/artists?time_range=medium_term&limit=1",
+    headers: {
+      Accept: "application/json",
+      "Content-Type": "application/json",
+      Authorization: "Bearer " + access_token
+    }
+  };
+  request(options, (error, response, body) => {
+    if (error) {
+      return console.log("Failed to get Data");
+    }
+    res.send(JSON.parse(body));
+  });
 });
 
 app.listen(8888, () => {
