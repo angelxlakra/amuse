@@ -109,18 +109,33 @@ class Profile extends Component {
                 viewBox="0 0 1100 1100"
                 xmlns="http://www.w3.org/2000/svg"
               >
-                <g transform="translate(300,300)">
+                <g
+                  transform="translate(500,350)
+                scale(2.2,1.9)"
+                >
                   <path
                     d="M139.2,-160.8C184.4,-158.8,227.7,-123.4,226.6,-83.8C225.4,-44.2,179.7,-0.3,155.2,42.8C130.7,85.9,127.4,128.3,105,147.2C82.7,166.1,41.3,161.6,-1.3,163.3C-43.9,165.1,-87.8,173.1,-133.9,162C-180,150.8,-228.4,120.4,-240.4,79.1C-252.3,37.9,-227.9,-14.1,-204.7,-60.7C-181.5,-107.2,-159.5,-148.2,-125.6,-153.9C-91.7,-159.5,-45.8,-129.8,0.6,-130.6C47,-131.4,94,-162.8,139.2,-160.8Z"
-                    fill="#00000080"
+                    fill="#000000"
                   />
                 </g>
               </svg>
               <div className="topTrack">
+                <h1 className="headTrack">Most Played Recent Track</h1>
+                <p id="paraTrack">
+                  <a className="paraTrack" href={track.external_urls.spotify}>
+                    {track.name}
+                  </a>
+                </p>
                 <img id="topTrackImg" src={track.album.images[0].url}></img>
               </div>
               <div className="topArtist">
                 <img id="topArtistImg" src={artist.images[0].url}></img>
+                <h1 className="headArtist">Most Played Recent Artist</h1>
+                <p id="paraArtist">
+                  <a className="paraArtist" href={artist.external_urls.spotify}>
+                    {artist.name}
+                  </a>
+                </p>
               </div>
             </div>
           )}
