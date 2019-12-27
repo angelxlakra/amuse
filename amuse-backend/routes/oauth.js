@@ -99,8 +99,12 @@ app.get("/callback", (req, res) => {
                 image_url: image,
                 country: body.country,
                 email: body.email,
+                premium: false,
                 followers: body.followers.total
               });
+              if (body.product === "premium") {
+                user.premium = true;
+              }
               user.save();
               console.log("Saved user...");
             }

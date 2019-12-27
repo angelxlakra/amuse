@@ -5,6 +5,7 @@ var cors = require("cors");
 var cookieParser = require("cookie-parser");
 var oauth = require("./routes/oauth");
 var top = require("./routes/top");
+var search = require("./routes/search");
 var mongoose = require("mongoose");
 const { User } = require("./models/user");
 
@@ -26,12 +27,13 @@ app
   .use(cookieParser())
   .use("/auth", oauth)
   .use("/top", top)
+  .use("/search", search)
   .use(morgan("tiny"));
 
 app.get("/profile/:id", async (req, res) => {
   const id = req.params.id;
   const user = await User.find({ s_id: id }).limit(1);
-  console.log(user);
+  // console.log(user);
   res.send(user);
 });
 

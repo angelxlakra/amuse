@@ -14,13 +14,13 @@ const NavBar = ({ username, pr_img }) => {
         </div>
         <ul className="navlinks">
           <li>
-            <Link className="nav-item" to="/home ">
+            <Link className="nav-item" to="/">
               Home
             </Link>
           </li>
           <li>
-            <Link className="nav-item" to="#">
-              Shuffle
+            <Link className="nav-item" to="/search">
+              Search
             </Link>
           </li>
           <li>
@@ -32,7 +32,7 @@ const NavBar = ({ username, pr_img }) => {
         <div className="profiler1">
           {localStorage.getItem("access_token") && (
             <div className="profiler2">
-              <img className="prof_img" src={pr_img}></img>
+              <img className="prof_img" src={pr_img} alt="prof_img"></img>
               <Link className="nav-item prof" to="/profile">
                 {name}
               </Link>
