@@ -35,12 +35,13 @@
   top: 30px;
   left: -50px;
   font-size: 40px;
+  color: grey;
 }
 
 .searchBox {
   font-size: 55px;
   font-family: "Rubik", sans-serif;
-  color: black;
+  color: white;
   border: none;
   background-color: #00000000;
   outline: none;
@@ -50,34 +51,49 @@
 }
 
 .searchBox::placeholder {
-  color: #00000030;
+  color: #00000080;
 }
 
 .result {
   position: absolute;
-  width: 100%;
+  left: 140px;
   top: 300px;
 }
 
-.trackComp,
-.artistComp,
-.albumComp,
-.playlistComp {
-  width: 100%;
+.searchComp {
+  width: 360px;
   height: 300px;
+  position: relative;
+  display: inline-block;
+  margin-left: 20px;
+  border-radius: 10px;
 }
 
-.trackComp {
-  background: #ff000080;
+.searchComp:nth-child(1) {
+  background: blue;
 }
 
-.topTrackSearch {
-  background: #00007890;
+.searchComp:nth-child(2) {
+  background: green;
+}
+
+.searchComp:nth-child(3) {
+  background: #af0000;
+}
+
+.searchComp:nth-child(4) {
+  background: orange;
+}
+
+.topSearch {
+  background: #ffffff20;
   position: relative;
   top: 30px;
-  left: 160px;
+  left: 30px;
   height: 80%;
   width: 300px;
+  border-radius: 10px;
+  overflow: hidden;
 }
 
 #topSearchImg {
@@ -88,41 +104,28 @@
   height: 100px;
 }
 
-.artistComp {
-  background: #0000ff80;
+.topSearchName {
+  font-family: "Rubik", sans-serif;
+  color: white;
+  margin: 30px 20px;
+  font-size: 20px;
+  font-weight: bold;
+  display: block;
 }
 
-.topArtistSearch {
-  background: #78000090;
-  position: relative;
-  top: 30px;
-  left: 160px;
-  height: 80%;
-  width: 300px;
+.topSearchName:hover {
+  text-decoration: underline;
 }
 
-.albumComp {
-  background: #00ff0080;
-}
-
-.topAlbumSearch {
-  background: #45007890;
-  position: relative;
-  top: 30px;
-  left: 160px;
-  height: 80%;
-  width: 300px;
-}
-
-.playlistComp {
-  background: white;
-}
-
-.topPlaylistSearch {
-  background: #00ac7890;
-  position: relative;
-  top: 30px;
-  left: 160px;
-  height: 80%;
-  width: 300px;
+.topLabel {
+  background: #000000c0;
+  color: white;
+  font-size: 15px;
+  font-family: "Rubik", sans-serif;
+  position: absolute;
+  left: 150px;
+  top: 20px;
+  padding: 5px 5px;
+  border-radius: 5px;
+  text-transform: uppercase;
 }

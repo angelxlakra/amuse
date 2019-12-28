@@ -29,7 +29,7 @@ const makeRequestCreator = () => {
       }
       const res = await axios.get(query, { cancelToken: cancel.token });
 
-      const result = res.data;
+      const result = await res.data;
       // console.log("result", result);
       // Store response
       resources[query] = result;

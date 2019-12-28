@@ -2,6 +2,10 @@ const express = require("express"),
   request = require("request"),
   app = express.Router();
 
+var morgan = require("morgan");
+
+app.use(morgan("tiny"));
+
 app.get("/track/:access_token", async (req, res) => {
   const access_token = req.params.access_token;
   const options = {

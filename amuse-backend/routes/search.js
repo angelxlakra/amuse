@@ -3,6 +3,10 @@ const express = require("express"),
   app = express.Router(),
   querystring = require("querystring");
 
+var morgan = require("morgan");
+
+app.use(morgan("tiny"));
+
 app.get("/", async (req, res) => {
   var query = req.query.query;
   query += "*";

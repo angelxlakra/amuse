@@ -18,6 +18,7 @@ class LoggedIn extends Component {
     const tokens = this.getHashParams();
     console.log("tokens", tokens);
     localStorage.setItem("access_token", tokens.access_token);
+    localStorage.setItem("refresh_token", tokens.refresh_token);
     localStorage.setItem("id", tokens.id);
     setTimeout(function() {
       window.location = "/";

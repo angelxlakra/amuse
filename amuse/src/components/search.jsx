@@ -26,15 +26,30 @@ class Search extends Component {
         filter
       )}`
     );
-    if (res) {
-      if (res.error) {
-        if (res.error.status === 401) {
-          console.log("error", res.data.error);
-          alert("Session Expired, Login Again");
-          window.location = "/logout";
-        }
-      }
+    try {
+      console.log(res);
       this.setState({ loading: false, data: res });
+
+      if (res && res.error && res.error.status === 401) {
+        const rToken = localStorage.getItem("refresh_token");
+        const aToken = await axios.get(
+          "http://localhost:8888/auth/refresh_token/" + rToken
+        );
+        console.log("a", aToken);
+
+        localStorage.setItem("access_token", aToken);
+        alert("Tokens Refreshed");
+        window.location = "/search";
+      }
+    } catch (error) {
+      const rToken = localStorage.getItem("refresh_token");
+      const aToken = await axios.get(
+        "http://localhost:8888/auth/refresh_token/" + rToken
+      );
+      console.log("a", aToken.data);
+      localStorage.setItem("access_token", aToken.data.access_token);
+      alert("Tokens Refreshed");
+      window.location = "/search";
     }
   };
 
@@ -55,7 +70,7 @@ class Search extends Component {
           <input
             type="text"
             className="searchBox"
-            placeholder="Search for Artists, Songs or Playlists..."
+            placeholder="Search for Artists, Songs or Albums..."
             onChange={e => {
               this.handleSearch(e);
             }}

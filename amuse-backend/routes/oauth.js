@@ -1,6 +1,8 @@
 var express = require("express");
 var request = require("request"); // "Request" library
 var querystring = require("querystring");
+var morgan = require("morgan");
+
 const mongoose = require("mongoose");
 const { User } = require("../models/user");
 
@@ -11,6 +13,8 @@ var redirect_uri = "http://localhost:8888/auth/callback"; // Your redirect uri
 const stateKey = "spotify_auth_state";
 
 const app = express.Router();
+
+app.use(morgan("tiny"));
 
 //Generate random String containing numbers and alphabets
 var generateRandomString = length => {
@@ -132,9 +136,9 @@ app.get("/callback", (req, res) => {
   }
 });
 
-app.get("/refresh_token", function(req, res) {
+app.get("/refresh_token/:refresh_token", function(req, res) {
   // requesting access token from refresh token
-  var refresh_token = req.query.refresh_token;
+  var refresh_token = req.params.refresh_token;
   var authOptions = {
     url: "https://accounts.spotify.com/api/token",
     headers: {

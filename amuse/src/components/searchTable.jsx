@@ -1,4 +1,5 @@
 import React from "react";
+import SearchResult from "./searchResult";
 
 const SearchTable = ({ query, data, filter }) => {
   const {
@@ -16,51 +17,11 @@ const SearchTable = ({ query, data, filter }) => {
   }
   return (
     <div className="result">
-      {isTrack && (
-        <div className="trackComp">
-          <div className="topTrackSearch">
-            <img
-              id="topSearchImg"
-              src={data.tracks.items[0].album.images[0].url}
-              alt="trackImg"
-            ></img>
-          </div>
-        </div>
-      )}
-      {isArtist && (
-        <div className="artistComp">
-          <div className="topArtistSearch">
-            {data.artists.items[0].images.length && (
-              <img
-                id="topSearchImg"
-                src={data.artists.items[0].images[0].url}
-                alt="artistImg"
-              ></img>
-            )}
-          </div>
-        </div>
-      )}
-      {isAlbum && (
-        <div className="albumComp">
-          <div className="topAlbumSearch">
-            <img
-              id="topSearchImg"
-              src={data.albums.items[0].images[0].url}
-              alt="albumImg"
-            ></img>
-          </div>
-        </div>
-      )}
+      {isTrack && <SearchResult type="track" items={data.tracks.items} />}
+      {isArtist && <SearchResult type="artist" items={data.artists.items} />}
+      {isAlbum && <SearchResult type="album" items={data.albums.items} />}
       {isPlaylist && (
-        <div className="playlistComp">
-          <div className="topPlaylistSearch">
-            <img
-              id="topSearchImg"
-              src={data.playlists.items[0].images[0].url}
-              alt="trackImg"
-            ></img>
-          </div>
-        </div>
+        <SearchResult type="playlist" items={data.playlists.items} />
       )}
     </div>
   );
