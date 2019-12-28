@@ -1,10 +1,12 @@
 import React, { Component } from "react";
 import "../styles/search.css";
 import axios from "axios";
+import SearchTable from "./searchTable";
+import { search } from "../middleware/util";
 
 class Search extends Component {
   state = {
-    searched: false,
+    loading: false,
     query: "",
     filter: {
       artist: true,
@@ -12,65 +14,37 @@ class Search extends Component {
       track: true,
       playlist: true
     },
-    data: {}
+    data: null
   };
 
-  async componentDidUpdate() {
+  search = async val => {
+    this.setState({ loading: true });
+    const { filter } = this.state;
     const access_token = localStorage.getItem("access_token");
-    const { query, filter } = this.state;
-    // console.log(query);
-    if (query) {
-      const searchData = await axios.get("http://localhost:8888/search/", {
-        params: {
-          query: query,
-          access_token: access_token,
-          filter: filter
+    const res = await search(
+      `http://localhost:8888/search?query=${val}&access_token=${access_token}&filter=${JSON.stringify(
+        filter
+      )}`
+    );
+    if (res) {
+      if (res.error) {
+        if (res.error.status === 401) {
+          console.log("error", res.data.error);
+          alert("Session Expired, Login Again");
+          window.location = "/logout";
         }
-      });
-      if (searchData.data.error) {
-        alert("Your Session Expired, Login Again!!");
-        window.location = "/logout";
       }
-      this.setState({ searched: true, data: searchData.data });
+      this.setState({ loading: false, data: res });
     }
-  }
-  componentDidMount() {
-    console.log("mount called");
-  }
+  };
 
   handleSearch = e => {
-    const query = e.target.value;
-    setTimeout(() => {
-      console.log("this just got laid here");
-    }, 4000);
-    if (query.length >= 3) {
-      this.setState({ query });
-    } else {
-      console.log("searched must go false now");
-      this.setState({ query: "", data: {}, searched: false });
-    }
+    this.search(e.target.value);
+    this.setState({ query: e.target.value });
   };
+
   render() {
-    const { searched, data, filter } = this.state;
-    const { tracks, artists, albums, playlists } = data;
-    let isTrack = false,
-      isArtist = false,
-      isAlbum = false,
-      isPlaylist = false;
-    if (searched) {
-      if (filter.track && tracks.total !== 0) {
-        isTrack = true;
-      }
-      if (filter.artist && artists.total !== 0) {
-        isArtist = true;
-      }
-      if (filter.album && albums.total !== 0) {
-        isAlbum = true;
-      }
-      if (filter.playlist && playlists.total !== 0) {
-        isPlaylist = true;
-      }
-    }
+    const { query, data, filter } = this.state;
     return (
       <div className="searchComponent">
         <div className="backCover"></div>
@@ -82,59 +56,12 @@ class Search extends Component {
             type="text"
             className="searchBox"
             placeholder="Search for Artists, Songs or Playlists..."
-            onChange={this.handleSearch}
+            onChange={e => {
+              this.handleSearch(e);
+            }}
           ></input>
         </div>
-        {searched && (
-          <div className="result">
-            {isTrack && (
-              <div className="trackComp">
-                <div className="topTrackSearch">
-                  <img
-                    id="topSearchImg"
-                    src={tracks.items[0].album.images[0].url}
-                    alt="trackImg"
-                  ></img>
-                </div>
-              </div>
-            )}
-            {isArtist && (
-              <div className="artistComp">
-                <div className="topArtistSearch">
-                  {artists.items[0].images.length && (
-                    <img
-                      id="topSearchImg"
-                      src={artists.items[0].images[0].url}
-                      alt="artistImg"
-                    ></img>
-                  )}
-                </div>
-              </div>
-            )}
-            {isAlbum && (
-              <div className="albumComp">
-                <div className="topAlbumSearch">
-                  <img
-                    id="topSearchImg"
-                    src={albums.items[0].images[0].url}
-                    alt="albumImg"
-                  ></img>
-                </div>
-              </div>
-            )}
-            {isPlaylist && (
-              <div className="playlistComp">
-                <div className="topPlaylistSearch">
-                  <img
-                    id="topSearchImg"
-                    src={playlists.items[0].images[0].url}
-                    alt="trackImg"
-                  ></img>
-                </div>
-              </div>
-            )}
-          </div>
-        )}
+        {data && <SearchTable query={query} data={data} filter={filter} />}
       </div>
     );
   }

@@ -1,10 +1,12 @@
 const express = require("express"),
   request = require("request"),
-  app = express.Router();
+  app = express.Router(),
+  querystring = require("querystring");
 
 app.get("/", async (req, res) => {
   var query = req.query.query;
-  query = query.replace(" ", "%20");
+  query += "*";
+  query = query.replace(" ", "*%20");
   const access_token = req.query.access_token;
   const filter = JSON.parse(req.query.filter);
   var types = "";
@@ -25,7 +27,7 @@ app.get("/", async (req, res) => {
   const url = "https://api.spotify.com/v1/search?";
   const options = {
     method: "GET",
-    url: url + "q=" + query + "&type=" + types + "&market=US&limit=5",
+    url: url + "q=" + query + "&type=" + types + "&market=IN&limit=5",
     headers: {
       Accept: "application/json",
       "Content-Type": "application/json",
