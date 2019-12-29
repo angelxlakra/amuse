@@ -18,8 +18,8 @@ const SearchTable = ({ query, data, filter }) => {
   return (
     <div className="result">
       {isTrack && <SearchResult type="track" items={data.tracks.items} />}
-      {isArtist && <SearchResult type="artist" items={data.artists.items} />}
       {isAlbum && <SearchResult type="album" items={data.albums.items} />}
+      {isArtist && <SearchResult type="artist" items={data.artists.items} />}
       {isPlaylist && (
         <SearchResult type="playlist" items={data.playlists.items} />
       )}

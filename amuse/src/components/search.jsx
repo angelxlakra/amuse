@@ -35,7 +35,7 @@ class Search extends Component {
         const aToken = await axios.get(
           "http://localhost:8888/auth/refresh_token/" + rToken
         );
-        console.log("a", aToken);
+        console.log("a", aToken.data);
 
         localStorage.setItem("access_token", aToken);
         alert("Tokens Refreshed");
@@ -76,6 +76,7 @@ class Search extends Component {
             }}
           ></input>
         </div>
+        {data && <h1 className="topResultHeader">Top Results</h1>}
         {data && <SearchTable query={query} data={data} filter={filter} />}
       </div>
     );
