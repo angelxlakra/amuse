@@ -5,10 +5,11 @@ import NavBar from "./components/navBar";
 import Profile from "./components/profile";
 import Home from "./components/home";
 import LoggedIn from "./components/loggedIn";
-// import LoggedIn from "./components/loggedIn";
 import Logout from "./components/logout";
 import axios from "axios";
 import Search from "./components/search";
+import ProtectedRoute from "./components/utils/protectedRoute";
+import Login from "./components/login";
 
 class App extends Component {
   state = { username: "12", pr_img: "", id: "" };
@@ -29,10 +30,11 @@ class App extends Component {
         <NavBar username={username} pr_img={pr_img}></NavBar>
         <main className="container1">
           <Switch>
+            <Route path="/login" component={Login}></Route>
             <Route path="/loggedIn" component={LoggedIn}></Route>
             <Route path="/logout" component={Logout}></Route>
             <Route path="/profile" component={Profile}></Route>
-            <Route path="/search" component={Search}></Route>
+            <ProtectedRoute path="/search" component={Search}></ProtectedRoute>
             <Route path="/" component={Home}></Route>
           </Switch>
         </main>

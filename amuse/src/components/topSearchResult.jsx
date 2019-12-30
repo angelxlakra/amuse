@@ -1,6 +1,6 @@
 import React from "react";
 
-const SearchResult = ({ type, items }) => {
+const TopSearchResult = ({ type, items }) => {
   let img_url,
     label,
     showAuthor = false;
@@ -50,4 +50,4 @@ const SearchResult = ({ type, items }) => {
   );
 };
 
-export default SearchResult;
+export default TopSearchResult;

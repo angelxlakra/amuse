@@ -43,9 +43,11 @@ app.get("/", async (req, res) => {
     if (error) {
       res.status(404);
       res.send("Failed to get data");
+      console.log("Err", error);
+    } else {
+      console.log("parseprob", body);
+      res.send(JSON.parse(body));
     }
-    console.log("parseprob", body);
-    res.send(JSON.parse(body));
   });
 });
 

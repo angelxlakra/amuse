@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import "../styles/search.css";
 import axios from "axios";
-import SearchTable from "./searchTable";
+import TopSearchTable from "./topSearchTable";
 import { search } from "../middleware/util";
 
 class Search extends Component {
@@ -35,9 +35,8 @@ class Search extends Component {
         const aToken = await axios.get(
           "http://localhost:8888/auth/refresh_token/" + rToken
         );
-        console.log("a", aToken.data);
 
-        localStorage.setItem("access_token", aToken);
+        localStorage.setItem("access_token", aToken.data.access_token);
         alert("Tokens Refreshed");
         window.location = "/search";
       }
@@ -46,7 +45,6 @@ class Search extends Component {
       const aToken = await axios.get(
         "http://localhost:8888/auth/refresh_token/" + rToken
       );
-      console.log("a", aToken.data);
       localStorage.setItem("access_token", aToken.data.access_token);
       alert("Tokens Refreshed");
       window.location = "/search";
@@ -76,8 +74,10 @@ class Search extends Component {
             }}
           ></input>
         </div>
-        {data && <h1 className="topResultHeader">Top Results</h1>}
-        {data && <SearchTable query={query} data={data} filter={filter} />}
+        {data && !data.error && (
+          <h1 className="topResultHeader">Top Results</h1>
+        )}
+        {data && <TopSearchTable query={query} data={data} filter={filter} />}
       </div>
     );
   }

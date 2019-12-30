@@ -1,7 +1,7 @@
 import React from "react";
-import SearchResult from "./searchResult";
+import TopSearchResult from "./topSearchResult";
 
-const SearchTable = ({ query, data, filter }) => {
+const TopSearchTable = ({ query, data, filter }) => {
   const {
     track: eTrack,
     artist: eArtist,
@@ -17,14 +17,14 @@ const SearchTable = ({ query, data, filter }) => {
   }
   return (
     <div className="result">
-      {isTrack && <SearchResult type="track" items={data.tracks.items} />}
-      {isAlbum && <SearchResult type="album" items={data.albums.items} />}
-      {isArtist && <SearchResult type="artist" items={data.artists.items} />}
+      {isTrack && <TopSearchResult type="track" items={data.tracks.items} />}
+      {isAlbum && <TopSearchResult type="album" items={data.albums.items} />}
+      {isArtist && <TopSearchResult type="artist" items={data.artists.items} />}
       {isPlaylist && (
-        <SearchResult type="playlist" items={data.playlists.items} />
+        <TopSearchResult type="playlist" items={data.playlists.items} />
       )}
     </div>
   );
 };
 
-export default SearchTable;
+export default TopSearchTable;
