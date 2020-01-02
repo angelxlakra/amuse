@@ -93,7 +93,6 @@ li::before {
 }
 
 .login {
-  display: inline;
   transform: translateY(15px);
   float: right;
   position: relative;

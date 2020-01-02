@@ -2,13 +2,14 @@ var express = require("express");
 var request = require("request"); // "Request" library
 var querystring = require("querystring");
 var morgan = require("morgan");
+var config = require("config");
 
 const mongoose = require("mongoose");
 const { User } = require("../models/user");
 
-var client_id = "7fd9b8e707e14fb18cd423001d6de23e";
-var client_secret = "dd219eb452524a05aa4e07f5ed7291db"; // Your secret
-var redirect_uri = "http://localhost:8888/auth/callback"; // Your redirect uri
+var client_id = config.get("auth.client_id");
+var client_secret = config.get("auth.client_secret");
+var redirect_uri = config.get("auth.redirect_url");
 
 const stateKey = "spotify_auth_state";
 
