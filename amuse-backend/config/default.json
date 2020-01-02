@@ -1,7 +1,0 @@
-{
-  "auth": {
-    "client_id": "7fd9b8e707e14fb18cd423001d6de23e",
-    "client_secret": "dd219eb452524a05aa4e07f5ed7291db",
-    "redirect_url": "http://localhost:8888/auth/callback"
-  }
-}
