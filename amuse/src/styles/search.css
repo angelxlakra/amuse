@@ -1,9 +1,11 @@
 .searchComponent {
-  background: #44556690;
+  background: #11556690;
   z-index: -1;
   min-width: 1855px;
   min-height: 950px;
+  max-height: 2000px;
   position: absolute;
+  overflow: auto;
   left: 0;
   top: 0;
   background-size: 100%;
@@ -11,7 +13,7 @@
   background-position: center center;
 }
 
-.backCover {
+/* .backCover {
   z-index: 0;
   background: #00000080;
   width: 1855px;
@@ -19,7 +21,7 @@
   position: absolute;
   left: 0;
   top: 0;
-}
+} */
 
 .searchContainer {
   /* display: block; */
@@ -156,5 +158,70 @@
 }
 
 .topSearchAuthor:hover {
+  text-decoration: underline;
+}
+
+.searchresult {
+  height: 300px;
+  width: 900px;
+  /* overflow: hidden; */
+  z-index: 9;
+  position: relative;
+  left: 950px;
+  top: 300px;
+  /* background: cornflowerblue; */
+  /* border: 1px black solid; */
+}
+
+.searchresult:nth-of-type(3),
+.searchresult:nth-of-type(4) {
+  left: 150px;
+  top: 300px;
+}
+
+.resultLabel {
+  font-family: "Rubik", sans-serif;
+  font-size: 50px;
+  color: white;
+  text-transform: capitalize;
+}
+
+.singleResult {
+  height: 150px;
+  width: 130px;
+  border-radius: 5px;
+  display: inline-block;
+  margin: 25px 25px 25px 10px;
+  background: #11777780;
+  overflow: hidden;
+  transition: all ease-in-out 250ms;
+}
+
+.singleResult:hover {
+  background: #00000070;
+  transform: translate(2px, -2px);
+  box-shadow: 10px -10px 20px #ffffff80;
+}
+.resultImage {
+  height: 80px;
+  position: relative;
+  top: 10px;
+  left: 25px;
+}
+
+.searchName {
+  font-family: "Rubik", sans-serif;
+  color: white;
+  /* background: black; */
+  margin: 10px 20px;
+  font-weight: bold;
+  display: block;
+  max-height: 48px;
+  overflow: hidden;
+  font-size: 10px;
+  text-align: center;
+}
+
+.searchName:hover {
   text-decoration: underline;
 }

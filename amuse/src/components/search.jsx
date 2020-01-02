@@ -3,6 +3,8 @@ import "../styles/search.css";
 import axios from "axios";
 import TopSearchTable from "./topSearchTable";
 import { search } from "../middleware/util";
+import SearchResults from "./searchResults";
+import SearchTable from "./searchTable";
 
 class Search extends Component {
   state = {
@@ -78,6 +80,7 @@ class Search extends Component {
           <h1 className="topResultHeader">Top Results</h1>
         )}
         {data && <TopSearchTable query={query} data={data} filter={filter} />}
+        {data && <SearchTable filter={filter} data={data}></SearchTable>}
       </div>
     );
   }
