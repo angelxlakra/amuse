@@ -39,14 +39,17 @@ const NavBar = ({ username, pr_img }) => {
             </div>
           )}
           {localStorage.getItem("access_token") && (
-            <a className="nav-item logout" href="http://localhost:3000/logout">
+            <a
+              className="nav-item logout"
+              href="http://192.168.157.122:3000/logout"
+            >
               Logout
             </a>
           )}
           {!localStorage.getItem("access_token") && (
             <a
               className="nav-item login"
-              href="http://localhost:8888/auth/login"
+              href="http://192.168.157.122:8888/auth/login"
             >
               Login
             </a>

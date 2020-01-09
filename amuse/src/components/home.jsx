@@ -14,7 +14,7 @@ const Home = () => {
           <p className="par">with our music turned up loud?</p>
           <p className="par">Click below to get Started.</p>
         </div>
-        <a className="login-btn" href="http://localhost:8888/auth/login">
+        <a className="login-btn" href="http://192.168.157.122:8888/auth/login">
           <span className="spotify-ic">
             <i className="fab fa-spotify"></i>
           </span>

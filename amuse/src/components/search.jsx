@@ -24,7 +24,7 @@ class Search extends Component {
     const { filter } = this.state;
     const access_token = localStorage.getItem("access_token");
     const res = await search(
-      `http://localhost:8888/search?query=${val}&access_token=${access_token}&filter=${JSON.stringify(
+      `http://192.168.157.122:8888/search?query=${val}&access_token=${access_token}&filter=${JSON.stringify(
         filter
       )}`
     );
@@ -35,7 +35,7 @@ class Search extends Component {
       if (res && res.error && res.error.status === 401) {
         const rToken = localStorage.getItem("refresh_token");
         const aToken = await axios.get(
-          "http://localhost:8888/auth/refresh_token/" + rToken
+          "http://192.168.157.122:8888/auth/refresh_token/" + rToken
         );
 
         localStorage.setItem("access_token", aToken.data.access_token);
@@ -45,7 +45,7 @@ class Search extends Component {
     } catch (error) {
       const rToken = localStorage.getItem("refresh_token");
       const aToken = await axios.get(
-        "http://localhost:8888/auth/refresh_token/" + rToken
+        "http://192.168.157.122:8888/auth/refresh_token/" + rToken
       );
       localStorage.setItem("access_token", aToken.data.access_token);
       alert("Tokens Refreshed");

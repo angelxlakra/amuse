@@ -114,7 +114,7 @@ app.get("/callback", (req, res) => {
               console.log("Saved user...");
             }
             res.redirect(
-              "http://localhost:3000/loggedIn/#" +
+              "http://192.168.157.122:3000/loggedIn/#" +
                 querystring.stringify({
                   id: body.id,
                   access_token: access_token,
