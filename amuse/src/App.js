@@ -10,14 +10,20 @@ import axios from "axios";
 import Search from "./components/search";
 import ProtectedRoute from "./components/utils/protectedRoute";
 import Login from "./components/login";
+import UserHome from "./components/userHome";
+// const config = require("dotenv").require();
 
 class App extends Component {
   state = { username: "12", pr_img: "", id: "" };
 
   async componentDidMount() {
     const id = localStorage.getItem("id");
+    const host = process.env.HOST_NAME;
+    const port = process.env.PORT_B;
     if (id && this.state.id !== id) {
-      let { data } = await axios.get("http://localhost:8888/profile/" + id);
+      let { data } = await axios.get(
+        "http://192.168.157.122:8888/profile/" + id
+      );
       data = data[0];
       this.setState({ username: data.name, pr_img: data.image_url, id: id });
     }
@@ -34,6 +40,10 @@ class App extends Component {
             <Route path="/loggedIn" component={LoggedIn}></Route>
             <Route path="/logout" component={Logout}></Route>
             <Route path="/profile" component={Profile}></Route>
+            <ProtectedRoute
+              path="/userHome"
+              component={UserHome}
+            ></ProtectedRoute>
             <ProtectedRoute path="/search" component={Search}></ProtectedRoute>
             <Route path="/" component={Home}></Route>
           </Switch>

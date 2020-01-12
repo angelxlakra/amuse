@@ -8,10 +8,14 @@ class Profile extends Component {
   async componentDidMount() {
     const id = localStorage.getItem("id");
     const access = localStorage.getItem("access_token");
-    const { data } = await axios.get("http://localhost:8888/profile/" + id);
-    const track = await axios.get("http://localhost:8888/top/track/" + access);
+    const { data } = await axios.get(
+      "http://192.168.157.122:8888/profile/" + id
+    );
+    const track = await axios.get(
+      "http://192.168.157.122:8888/top/track/" + access
+    );
     const artist = await axios.get(
-      "http://localhost:8888/top/artist/" + access
+      "http://192.168.157.122:8888/top/artist/" + access
     );
     console.log(track);
     console.log(artist);
@@ -92,6 +96,8 @@ class Profile extends Component {
                 </p>
 
                 <a
+                  target="_blank"
+                  rel="noopener noreferrer"
                   className="td pro_link"
                   href={"https://open.spotify.com/user/" + userData.s_id}
                 >
@@ -122,7 +128,12 @@ class Profile extends Component {
               <div className="topTrack">
                 <h1 className="headTrack">Most Played Recent Track</h1>
                 <p id="paraTrack">
-                  <a className="paraTrack" href={track.external_urls.spotify}>
+                  <a
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="paraTrack"
+                    href={track.external_urls.spotify}
+                  >
                     {track.name}
                   </a>
                 </p>
@@ -132,7 +143,12 @@ class Profile extends Component {
                 <img id="topArtistImg" src={artist.images[0].url}></img>
                 <h1 className="headArtist">Most Played Recent Artist</h1>
                 <p id="paraArtist">
-                  <a className="paraArtist" href={artist.external_urls.spotify}>
+                  <a
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="paraArtist"
+                    href={artist.external_urls.spotify}
+                  >
                     {artist.name}
                   </a>
                 </p>

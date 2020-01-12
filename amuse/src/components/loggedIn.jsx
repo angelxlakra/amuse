@@ -21,7 +21,7 @@ class LoggedIn extends Component {
     localStorage.setItem("refresh_token", tokens.refresh_token);
     localStorage.setItem("id", tokens.id);
     setTimeout(function() {
-      window.location = "/";
+      window.location = "/userHome";
     }, 2000);
   }
   render() {
