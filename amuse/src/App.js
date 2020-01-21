@@ -11,6 +11,7 @@ import Search from "./components/search";
 import ProtectedRoute from "./components/utils/protectedRoute";
 import Login from "./components/login";
 import UserHome from "./components/userHome";
+import Party from "./components/party";
 // const config = require("dotenv").require();
 
 class App extends Component {
@@ -18,8 +19,6 @@ class App extends Component {
 
   async componentDidMount() {
     const id = localStorage.getItem("id");
-    const host = process.env.HOST_NAME;
-    const port = process.env.PORT_B;
     if (id && this.state.id !== id) {
       let { data } = await axios.get(
         "http://192.168.157.122:8888/profile/" + id
@@ -45,6 +44,7 @@ class App extends Component {
               component={UserHome}
             ></ProtectedRoute>
             <ProtectedRoute path="/search" component={Search}></ProtectedRoute>
+            <ProtectedRoute path="/party" component={Party}></ProtectedRoute>
             <Route path="/" component={Home}></Route>
           </Switch>
         </main>

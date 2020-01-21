@@ -1,6 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import "../styles/navBar.css";
+import Party from "./party";
 
 const NavBar = ({ username, pr_img }) => {
   const name = username.split(" ")[0];
@@ -24,8 +25,8 @@ const NavBar = ({ username, pr_img }) => {
             </Link>
           </li>
           <li>
-            <Link className="nav-item" to="#">
-              Group
+            <Link className="nav-item" to="/party">
+              Party
             </Link>
           </li>
         </ul>
@@ -39,12 +40,9 @@ const NavBar = ({ username, pr_img }) => {
             </div>
           )}
           {localStorage.getItem("access_token") && (
-            <a
-              className="nav-item logout"
-              href="http://192.168.157.122:3000/logout"
-            >
+            <Link className="nav-item logout" to="/logout">
               Logout
-            </a>
+            </Link>
           )}
           {!localStorage.getItem("access_token") && (
             <a
