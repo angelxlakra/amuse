@@ -5,7 +5,7 @@ const ProtectedRoute = ({ component: Component, render, ...rest }) => {
     <Route
       {...rest}
       render={props => {
-        if (!localStorage.getItem("id"))
+        if (!sessionStorage.getItem("id"))
           return (
             <Redirect
               to={{ pathname: "/login", state: { from: props.location } }}

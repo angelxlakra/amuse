@@ -6,8 +6,8 @@ class Profile extends Component {
   state = { userData: {}, artist: {}, track: {} };
 
   async componentDidMount() {
-    const id = localStorage.getItem("id");
-    const access = localStorage.getItem("access_token");
+    const id = sessionStorage.getItem("id");
+    const access = sessionStorage.getItem("access_token");
     const { data } = await axios.get(
       "http://192.168.157.122:8888/profile/" + id
     );

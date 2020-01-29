@@ -2,7 +2,7 @@ import React from "react";
 import "../styles/home.css";
 
 const Home = () => {
-  const id = localStorage.getItem("id");
+  const id = sessionStorage.getItem("id");
   if (id) {
     window.location = "/userHome";
   } else {

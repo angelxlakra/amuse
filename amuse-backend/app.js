@@ -6,6 +6,7 @@ var cookieParser = require("cookie-parser");
 var oauth = require("./routes/oauth");
 var top = require("./routes/top");
 var search = require("./routes/search");
+var play = require("./routes/play");
 var mongoose = require("mongoose");
 const { User } = require("./models/user");
 
@@ -28,6 +29,7 @@ app
   .use("/auth", oauth)
   .use("/top", top)
   .use("/search", search)
+  .use("/play", play)
   .use(morgan("tiny"));
 
 app.get("/profile/:id", async (req, res) => {

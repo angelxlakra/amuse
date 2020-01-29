@@ -1,6 +1,6 @@
 import React from "react";
 const Login = () => {
-  if (!localStorage.getItem("id")) {
+  if (!sessionStorage.getItem("id")) {
     // alert("logged out state was in");
     window.location = "http://192.168.157.122:8888/auth/login";
   } else {

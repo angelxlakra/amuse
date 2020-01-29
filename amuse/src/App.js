@@ -18,7 +18,7 @@ class App extends Component {
   state = { username: "12", pr_img: "", id: "" };
 
   async componentDidMount() {
-    const id = localStorage.getItem("id");
+    const id = sessionStorage.getItem("id");
     if (id && this.state.id !== id) {
       let { data } = await axios.get(
         "http://192.168.157.122:8888/profile/" + id

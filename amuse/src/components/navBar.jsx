@@ -31,7 +31,7 @@ const NavBar = ({ username, pr_img }) => {
           </li>
         </ul>
         <div className="profiler1">
-          {localStorage.getItem("access_token") && (
+          {sessionStorage.getItem("access_token") && (
             <div className="profiler2">
               <img className="prof_img" src={pr_img} alt="prof_img"></img>
               <Link className="nav-item prof" to="/profile">
@@ -39,12 +39,12 @@ const NavBar = ({ username, pr_img }) => {
               </Link>
             </div>
           )}
-          {localStorage.getItem("access_token") && (
+          {sessionStorage.getItem("access_token") && (
             <Link className="nav-item logout" to="/logout">
               Logout
             </Link>
           )}
-          {!localStorage.getItem("access_token") && (
+          {!sessionStorage.getItem("access_token") && (
             <a
               className="nav-item login"
               href="http://192.168.157.122:8888/auth/login"

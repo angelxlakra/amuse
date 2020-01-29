@@ -1,4 +1,5 @@
 import React from "react";
+import axios from "axios";
 
 const TopSearchResult = ({ type, items }) => {
   let img_url,
@@ -19,6 +20,12 @@ const TopSearchResult = ({ type, items }) => {
       img_url =
         "https://developer.spotify.com/assets/branding-guidelines/icon1@2x.png";
     }
+  }
+
+  async function handleOnClick() {
+    const x = await axios.get(
+      "http://192.168.157.122:8888/play/" + items[0].uri
+    );
   }
 
   return (
@@ -45,6 +52,7 @@ const TopSearchResult = ({ type, items }) => {
               {author.name}
             </a>
           ))}
+        <button onClick={handleOnClick}>Play</button>
       </div>
     </div>
   );

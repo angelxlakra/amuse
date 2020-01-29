@@ -22,7 +22,7 @@ class Search extends Component {
   search = async val => {
     this.setState({ loading: true });
     const { filter } = this.state;
-    const access_token = localStorage.getItem("access_token");
+    const access_token = sessionStorage.getItem("access_token");
     const res = await search(
       `http://192.168.157.122:8888/search?query=${val}&access_token=${access_token}&filter=${JSON.stringify(
         filter
@@ -33,21 +33,21 @@ class Search extends Component {
       this.setState({ loading: false, data: res });
 
       if (res && res.error && res.error.status === 401) {
-        const rToken = localStorage.getItem("refresh_token");
+        const rToken = sessionStorage.getItem("refresh_token");
         const aToken = await axios.get(
           "http://192.168.157.122:8888/auth/refresh_token/" + rToken
         );
 
-        localStorage.setItem("access_token", aToken.data.access_token);
+        sessionStorage.setItem("access_token", aToken.data.access_token);
         alert("Tokens Refreshed");
         window.location = "/search";
       }
     } catch (error) {
-      const rToken = localStorage.getItem("refresh_token");
+      const rToken = sessionStorage.getItem("refresh_token");
       const aToken = await axios.get(
         "http://192.168.157.122:8888/auth/refresh_token/" + rToken
       );
-      localStorage.setItem("access_token", aToken.data.access_token);
+      sessionStorage.setItem("access_token", aToken.data.access_token);
       alert("Tokens Refreshed");
       window.location = "/search";
     }
